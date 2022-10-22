@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/microservice-commandes/mcommandes.iml" filepath="$PROJECT_DIR$/microservice-commandes/mcommandes.iml" />
       <module fileurl="file://$PROJECT_DIR$/microservice-exam/microservice-exam.iml" filepath="$PROJECT_DIR$/microservice-exam/microservice-exam.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice-quiz/microservice-quiz.iml" filepath="$PROJECT_DIR$/microservice-quiz/microservice-quiz.iml" />
       <module fileurl="file://$PROJECT_DIR$/microservice-paiement/mpaiement.iml" filepath="$PROJECT_DIR$/microservice-paiement/mpaiement.iml" />
       <module fileurl="file://$PROJECT_DIR$/microservice-cours/mproduits.iml" filepath="$PROJECT_DIR$/microservice-cours/mproduits.iml" />
     </modules>
