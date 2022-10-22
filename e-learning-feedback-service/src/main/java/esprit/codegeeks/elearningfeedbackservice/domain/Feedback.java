@@ -1,4 +1,4 @@
-package esprit.codegeeks.elearningfeedbackservice.feedback;
+package esprit.codegeeks.elearningfeedbackservice.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -21,7 +21,7 @@ public class Feedback {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String note;
-    private Long course_id;
+
 
 
     @Override

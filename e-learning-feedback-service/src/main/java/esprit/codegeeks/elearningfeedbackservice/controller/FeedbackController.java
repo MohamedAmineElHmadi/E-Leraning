@@ -1,5 +1,7 @@
-package esprit.codegeeks.elearningfeedbackservice.feedback;
+package esprit.codegeeks.elearningfeedbackservice.controller;
 
+import esprit.codegeeks.elearningfeedbackservice.domain.Feedback;
+import esprit.codegeeks.elearningfeedbackservice.service.FeedbackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,25 +12,22 @@ import java.util.List;
 @RequestMapping("/feedbacks")
 public class FeedbackController {
 
-    private final feedbackService feedbackService;
+    private final FeedbackService feedbackService;
     @PostMapping
     public Feedback addFeedback(@RequestBody Feedback feedback){
-        return feedbackService.save(feedback);
+        return feedbackService.addFeedback(feedback);
     }
 
     @GetMapping
     public List<Feedback> getAll(){
-        return feedbackService.findAll();
+        return feedbackService.getAll();
     }
 
-    @GetMapping("/{course_id}")
-    public List<Feedback> findAllByNoteIs(@PathVariable (value = "course_id") Long course_id){
-        return feedbackService.findAllByNoteIs(course_id);
-    }
+
     @DeleteMapping("/{id}")
     public List<Feedback>  removeFeedback(@PathVariable long id){
         feedbackService.deleteFeedback(id);
-        return feedbackService.findAll();
+        return feedbackService.getAll();
     }
 
 
