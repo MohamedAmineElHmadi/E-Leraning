@@ -15,7 +15,10 @@ import java.util.List;
 public class RatingController {
 
     private final IRatingService ratingService;
-
+    @GetMapping("/list")
+    public String test() {
+        return "hello";
+    }
     @GetMapping("/course/{courseid}")
     public Integer getRatingForCourse(@PathVariable("courseid") Long courseid){
       return ratingService.getCoursesRating(courseid);
