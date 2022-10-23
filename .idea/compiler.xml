@@ -14,11 +14,11 @@
         <module name="zuul-service" />
         <module name="E-Leraning" />
         <module name="e-learning-feedback-service" />
-        <module name="microservice-quiz" />
         <module name="mproduits" />
+        <module name="microservice-quiz" />
         <module name="zuul-microservice" />
-        <module name="jwtdemo" />
         <module name="mcommandes" />
+        <module name="jwtdemo" />
         <module name="microservice-exam" />
       </profile>
     </annotationProcessing>
