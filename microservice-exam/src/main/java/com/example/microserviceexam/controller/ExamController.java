@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/Exams/")
 @AllArgsConstructor
 public class ExamController {
-    private final ExamService examService;
+    private  ExamService examService;
     @GetMapping("list")
     public List<Exam> findAll() {
         return examService.findAll();
