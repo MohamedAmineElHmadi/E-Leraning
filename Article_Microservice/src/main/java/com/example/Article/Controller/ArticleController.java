@@ -18,10 +18,13 @@ public class ArticleController {
 
     @Autowired
    private ArticleRepository articleRep;
+    @CrossOrigin("*")
     @GetMapping("/articles")
     public List<Article> getAllArticle() {
         return articleRep.findAll();
     }
+
+    @CrossOrigin("*")
     @GetMapping("/article/{id}")
     public ResponseEntity<Article> getArticleById(@PathVariable(value = "id")Long id)
     throws  RessourceNotFoundException{
@@ -29,11 +32,15 @@ public class ArticleController {
             .orElseThrow(()-> new RessourceNotFoundException("Article Not Found"+id));
     return ResponseEntity.ok().body(article);
     }
+
+    @CrossOrigin("*")
     @PostMapping("/Article")
     public Article CreateArticle (@Validated @RequestBody Article article)
     {
         return articleRep.save(article);
     }
+
+    @CrossOrigin("*")
     @PutMapping("/article/{id}")
     public ResponseEntity<Article> updateArticle (@PathVariable(value = "id")Long Id,
                                                   @Validated @RequestBody Article articleDetails )
@@ -46,6 +53,8 @@ public class ArticleController {
         final Article updatedArticle =articleRep.save(article);
         return ResponseEntity.ok(updatedArticle);
     }
+
+    @CrossOrigin("*")
     @DeleteMapping("/article/{id}")
     public Map<String,Boolean> deleteArticle (@PathVariable(value="id")Long Id)
         throws  RessourceNotFoundException        {

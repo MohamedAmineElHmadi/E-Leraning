@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+
+@CrossOrigin("*")
 @RequestMapping("/rating")
 @RequiredArgsConstructor
 @Slf4j
 public class RatingController {
 
     private final IRatingService ratingService;
+
+    @CrossOrigin("*")
     @GetMapping("/list")
     public String test() {
         return "hello";
@@ -25,6 +29,7 @@ public class RatingController {
 
     }
 
+    @CrossOrigin("*")
     @GetMapping("/{id}")
     public Rating getRating(@PathVariable("id") Long id) throws Exception {
 
@@ -32,16 +37,19 @@ public class RatingController {
 
     }
 
+    @CrossOrigin("*")
     @GetMapping
     public List<Rating> getRatings(){
         return ratingService.getratings();
     }
 
-
+    @CrossOrigin("*")
     @PostMapping()
     public Rating addRating(@RequestBody Rating rating){
       return   ratingService.addRating(rating);
     }
+
+    @CrossOrigin("*")
     @DeleteMapping("/{id}")
     public void deleteRating(@PathVariable("id") Long id){
         ratingService.deleteRating(id);

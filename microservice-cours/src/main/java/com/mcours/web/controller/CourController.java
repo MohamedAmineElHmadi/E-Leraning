@@ -19,6 +19,8 @@ public class CourController {
     CourDao courDao;
 
     // Affiche la liste de tous les cours disponibles
+
+    @CrossOrigin("*")
     @GetMapping(value = "/Cours")
     public List<Cour> listeDesCours() {
 
@@ -31,6 +33,8 @@ public class CourController {
     }
 
     //Récuperer un cour par son id
+
+    @CrossOrigin("*")
     @GetMapping(value = "/Cours/{id}")
     public Optional<Cour> recupererUnCour(@PathVariable int id) {
 
@@ -42,6 +46,7 @@ public class CourController {
         return cour;
     }
 
+    @CrossOrigin("*")
     @PostMapping(value = "/ajoutcours")
     public ResponseEntity<Cour> ajouterCour(@RequestBody Cour cour) {
 

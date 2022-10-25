@@ -78,6 +78,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>feedback-service</finalName>
     </build>
 
 </project>

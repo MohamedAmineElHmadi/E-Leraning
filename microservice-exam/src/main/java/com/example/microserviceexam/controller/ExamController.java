@@ -13,22 +13,32 @@ import java.util.List;
 @AllArgsConstructor
 public class ExamController {
     private final ExamService examService;
+
+    @CrossOrigin("*")
     @GetMapping("list")
     public List<Exam> findAll() {
         return examService.findAll();
     }
+
+    @CrossOrigin("*")
     @PostMapping( "save")
     public Exam saveOption(@RequestBody Exam e ){
         return    examService.addExam(e);
     }
+
+    @CrossOrigin("*")
     @GetMapping("findById/{id}")
     public Exam findById(@PathVariable("id") Long id) {
         return examService.findbyid(id);
     }
+
+    @CrossOrigin("*")
     @DeleteMapping("delete/{id}")
     public void delete(@PathVariable("id") long id) throws Exception {
         examService.delete(id);
     }
+
+    @CrossOrigin("*")
     @PutMapping("update/{id}")
     public Exam update(@RequestBody Exam e, @PathVariable("id") Long id) {
         Exam updateExam = examService.update(e, id);

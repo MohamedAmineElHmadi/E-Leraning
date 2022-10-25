@@ -1,0 +1,167 @@
+version: "3.9"
+services:
+  discovery:
+    build: ../eureka
+    ports:
+      - "8761:8761"
+    image: "discovery-service"
+
+  zuul:
+    build: ../zuul-microservice
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/
+    ports:
+      - "8762:8762"
+    image: "zuul-service"
+
+  article:
+    build: ../Article_Microservice
+    restart: always
+    ports:
+      - 8089:8089
+    depends_on:
+      - mysqldb
+  mysqldb:
+    image: "mysql:latest"
+    restart: always
+    ports:
+      - 3313:3313
+    environment:
+      MYSQL_DATABASE: articles
+      MYSQL_USER: amine
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_TCP_PORT: 3313
+
+  jwtdemo:
+    build: ../User_Microservice
+    restart: always
+    ports:
+      - 8082:8082
+    depends_on:
+      - mysqldb1
+  mysqldb1:
+    image: "mysql:latest"
+    restart: always
+    ports:
+      - 3307:3307
+    environment:
+      MYSQL_DATABASE: UserMicro
+      MYSQL_USER: amine1
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_TCP_PORT: 3307
+
+
+  rating:
+    build: ../rating-service
+    restart: always
+    ports:
+      - 8083:8083
+    depends_on:
+      - mysqldb3
+  mysqldb3:
+    image: "mysql:latest"
+    restart: always
+    ports:
+      - 3308:3308
+    environment:
+      MYSQL_DATABASE: ratingdb
+      MYSQL_USER: amine2
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_TCP_PORT: 3308
+
+
+#  feedback:
+#    build: ./e-learning-feedback-service
+#    restart: always
+#    ports:
+#      - 8084:8084
+#    depends_on:
+#      - mysqldb4
+#  mysqldb4:
+#    image: "mysql:latest"
+#    restart: always
+#    ports:
+#      - 3309:3309
+#    environment:
+#      MYSQL_DATABASE: feedbackservice
+#      MYSQL_USER: amine
+#      MYSQL_PASSWORD: 1234
+#      MYSQL_ROOT_PASSWORD: 1234
+#      MYSQL_TCP_PORT: 3309
+
+  commande:
+    build: ../microservice-commandes
+    restart: always
+    ports:
+      - 8085:8085
+  cours:
+    build: ../microservice-cours
+    restart: always
+    ports:
+      - 8086:8086
+    depends_on:
+      - mysqldb5
+  mysqldb5:
+    image: "mysql:latest"
+    restart: always
+    ports:
+      - 3310:3310
+    environment:
+      MYSQL_DATABASE: coursMS
+      MYSQL_USER: amine3
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_TCP_PORT: 3310
+  exam:
+    build: ../microservice-exam
+    restart: always
+    ports:
+      - 8087:8087
+    depends_on:
+      - mysqldb6
+  mysqldb6:
+    image: "mysql:latest"
+    restart: always
+    ports:
+      - 3311:3311
+    environment:
+      MYSQL_DATABASE: elearning
+      MYSQL_USER: amine4
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_TCP_PORT: 3311
+
+  quiz:
+    build: ../microservice-quiz
+    restart: always
+    ports:
+      - 8088:8088
+    depends_on:
+      - mysqldb7
+  mysqldb7:
+    image: "mysql:latest"
+    restart: always
+    ports:
+      - 3312:3312
+    environment:
+      MYSQL_DATABASE: quiz-MicroService
+      MYSQL_USER: amine5
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_TCP_PORT: 3312
+
+  paiement:
+    build: ../back
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_URL: mongodb+srv://admin:admin@auth.3d302.mongodb.net/Users?retryWrites=true&w=majority
+      PASSPHRASE: Mips2021#
+      CERTURL: https://api.demo.korm.kaspersky.com
+      Emailuser: siwar.benfakhta@gmail.com
+      Emailpass: blpocttmkdmozaph
+      TOKEN_KEY: Mips2021TokenKey

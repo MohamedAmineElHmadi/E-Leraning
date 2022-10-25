@@ -34,6 +34,7 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api")
 @Slf4j
 public class UserController {
@@ -44,15 +45,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @CrossOrigin("*")
     @GetMapping("/users")
     public ResponseEntity<List<AppUser>> getUsers() {
 
         return ResponseEntity.ok().body(userService.getUsers());
     }
+
+    @CrossOrigin("*")
     @GetMapping("/user/{id}")
     public AppUser getUserById(@PathVariable("id") Long id) throws  Exception{
         return userRepo.findById(id).orElseThrow(()->new RessourceNotFoundException(" Ce user  n'existe pas" +id));
     }
+
+    @CrossOrigin("*")
     @PutMapping("/user/{id}")
     public ResponseEntity<AppUser> updateUser (@PathVariable(value = "id")Long Id,
                                                   @Validated @RequestBody AppUser roleDetails )
@@ -66,6 +72,8 @@ public class UserController {
         final AppUser updatedUser =userRepo.save(user);
         return ResponseEntity.ok(updatedUser);
     }
+
+    @CrossOrigin("*")
     @DeleteMapping("/user/{id}")
     public Map<String,Boolean> deleteUser (@PathVariable(value="id")Long Id)
             throws  RessourceNotFoundException        {
@@ -78,7 +86,7 @@ public class UserController {
     }
 
 
-
+    @CrossOrigin("*")
     @PostMapping("/user/save")
     public ResponseEntity<AppUser> saveUser(@RequestBody AppUser user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
@@ -88,21 +96,27 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.SaveUser(user));
     }
 
+    @CrossOrigin("*")
     @PostMapping("/role/save")
     public ResponseEntity<Role> saveRole(@RequestBody Role role) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
 
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
+
+    @CrossOrigin("*")
     @GetMapping("/roles")
     public List<Role> getRoles(){
         return roleRepo.findAll();
     }
+
+    @CrossOrigin("*")
     @GetMapping("/role/{id}")
     public Role getRoleById(@PathVariable("id") Long id) throws  Exception{
         return roleRepo.findById(id).orElseThrow(()->new RessourceNotFoundException("Ce Role n'existe pas" +id));
     }
 
+    @CrossOrigin("*")
     @PutMapping("/role/{id}")
     public ResponseEntity<Role> updateRole (@PathVariable(value = "id")Long Id,
                                                @Validated @RequestBody Role roleDetails )
@@ -113,6 +127,8 @@ public class UserController {
         final Role updatedRole =roleRepo.save(role);
         return ResponseEntity.ok(updatedRole);
     }
+
+    @CrossOrigin("*")
     @DeleteMapping("/role/{id}")
     public Map<String,Boolean> deleteRole (@PathVariable(value="id")Long Id)
             throws  RessourceNotFoundException        {
@@ -124,13 +140,14 @@ public class UserController {
         return response;
     }
 
-
+    @CrossOrigin("*")
     @PostMapping("/role/addToUser")
     public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form) {
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
 
+    @CrossOrigin("*")
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);

@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -21,10 +23,20 @@ public class CommandeController {
 
     @Autowired
     CommandesDao commandesDao;
-    @GetMapping("/list")
-    public String getAllArticle() {
-        return "hello";
+
+    @CrossOrigin("*")
+    @GetMapping(value = "/ListCommandes")
+    public List<Commande> listeDesCommandes() {
+
+        List<Commande> commandeList = commandesDao.findAll();
+
+        if (commandeList.isEmpty()) throw new CommandeNotFoundException("list vide");;
+
+        return commandeList;
+
     }
+
+    @CrossOrigin("*")
     @PostMapping (value = "/commandes")
     public ResponseEntity<Commande> ajouterCommande(@RequestBody Commande commande){
 
@@ -35,6 +47,7 @@ public class CommandeController {
         return new ResponseEntity<Commande>(commande, HttpStatus.CREATED);
     }
 
+    @CrossOrigin("*")
     @GetMapping(value = "/commandes/{id}")
     public Optional<Commande> recupererUneCommande(@PathVariable int id){
 
@@ -44,4 +57,8 @@ public class CommandeController {
 
         return commande;
     }
+
+
+
+
 }
